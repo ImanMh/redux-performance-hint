@@ -32,11 +32,7 @@ export const describeDiff = (valueA: any, valueB: any, path: string[] = [], dept
         }
       }
       if (foundDiff) {
-        return {
-          changed: foundDiff.changed,
-          path: foundDiff.path,
-          value: { previous: valueA, next: valueB }
-        };
+        return foundDiff;
       }
       changed = false;
     } else {
@@ -50,6 +46,5 @@ export const describeDiff = (valueA: any, valueB: any, path: string[] = [], dept
   return {
     changed,
     path: path,
-    value: { previous: valueA, next: valueB },
   }
 }
