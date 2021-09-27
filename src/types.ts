@@ -1,4 +1,4 @@
 export type diffDescription = {
-    changed: boolean;
+    isEqual: boolean;
     path: string[];
 }

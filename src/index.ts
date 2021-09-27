@@ -18,7 +18,7 @@ an issue was detect during compare. Key 'b' on objects contain the same values b
 const isReferenceType = (input: any) => input === Object(input);
 
 export const describeDiff = (valueA: any, valueB: any, path: string[] = [], depth = 0): diffDescription => {
-  let changed;
+  let isEqual;
   if (isReferenceType(valueA) && isReferenceType(valueB)) {
     if (depth === 0) {
       const valueAKeys = Object.keys(valueA);
@@ -26,7 +26,7 @@ export const describeDiff = (valueA: any, valueB: any, path: string[] = [], dept
       for (let i = 0; i < valueAKeys.length; i++) {
         const currentKey = valueAKeys[i];
         const diffDescription= describeDiff(valueA[currentKey], valueB[currentKey], path.concat([currentKey]), depth + 1);
-        if (diffDescription.changed) {
+        if (!diffDescription.isEqual) {
           foundDiff = diffDescription;
           break;
         }
@@ -34,17 +34,16 @@ export const describeDiff = (valueA: any, valueB: any, path: string[] = [], dept
       if (foundDiff) {
         return foundDiff;
       }
-      changed = false;
+      isEqual = true;
     } else {
-      //should fail if valueA !== valueB replaced with true.
-      changed = valueA !== valueB;
+      isEqual = valueA === valueB;
     }
   } else {
-    changed = valueA !== valueB;
+    isEqual = valueA === valueB;
   }
 
   return {
-    changed,
+    isEqual,
     path: path,
   }
 }
