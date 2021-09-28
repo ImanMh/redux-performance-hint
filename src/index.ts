@@ -2,9 +2,9 @@ import {diffDescription, hintOptions, hintUserOptions} from './types';
 import { describeDiff } from './describe-diff';
 
 const logUnnecessaryUpdate = (valueA: any, valueB: any, diff :diffDescription) => {
-    console.group(`Warning! an unnecessary update detected on ${diff.path.join('.')}. You can improve performance by fixing this issue.`);
-    console.log(`old state: ${valueA}`);
-    console.log(`old state: ${valueB}`);
+    console.group(`Warning! an unnecessary render detected on ${diff.path.join('.')}. You can improve performance by fixing this issue.`);
+    console.log('old state: ', valueA);
+    console.log('old state:', valueB);
     console.log(`bad update: ${diff.path.join('.')}`);
     console.groupEnd();
 }
