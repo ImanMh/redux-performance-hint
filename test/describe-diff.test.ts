@@ -1,6 +1,6 @@
 import { describeDiff } from '../src/describe-diff';
 
-describe('content equal init', () => {
+describe('initial', () => {
   it('should be able to call', () => {
     expect(typeof describeDiff('a', 'b').isEqual).toEqual('boolean');
   });
